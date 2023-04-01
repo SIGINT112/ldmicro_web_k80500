@@ -1,0 +1,142 @@
+<html>
+<script src="led.js"></script>	
+<script src="ldinterpret.js"></script>	
+<script>
+	var runner;
+	var core;
+	var outp=[8];
+	var inp=[8];
+	var ap=[8];
+	var pp=[8];
+	let data=new Uint8Array(8);
+	let port;
+
+async function k8055(){
+	port=await navigator.hid.requestDevice({filters:[{vendorId:0x10cf}]});
+	port[0].open();
+	port[0].oninputreport=inr;
+	}
+	
+	let v;
+function inr(e){
+	v=new Uint8Array(e.data.buffer);
+	inp[0].value=(v[0]&16)?1:0;
+	inp[1].value=(v[0]&32)?1:0;
+	inp[2].value=(v[0]&1)?1:0;
+	inp[3].value=(v[0]&64)?1:0;
+	inp[4].value=(v[0]&128)?1:0;
+	ap[0].value=v[2];
+	ap[1].value=v[3];
+	}
+	
+async function send(){
+	let t=0;
+	for(let i=0;i<8;i++)
+	{
+	t|=(outp[i].value<<i);	
+	}
+	
+	data[0]=5;
+	data[1]=t;
+	data[2]=pp[0].value;
+	data[3]=pp[1].value;
+	if(port)await port[0].sendReport(0,data);
+}
+	
+	function id(e){return document.getElementById(e);}
+	
+	function init(){
+		core=new ldinterpret();
+		for(let i=0;i<8;i++){
+			outp[i]=id("out"+i);
+			inp[i]=id("in"+i);
+			ap[i]=id("a"+i);
+			pp[i]=id("p"+i);
+			}
+		}
+	
+
+	
+function run(){	
+for(let i=0;i<8;i++){
+			if(inp[i]&&(core.AddrX[i]>=0)){core.Bits[core.AddrX[i]]=inp[i].value;}else{core.Bits[core.AddrX[i]]=0;}
+			}
+
+core.Integers[core.AddrA[0]]=ap[0].value;
+core.Integers[core.AddrA[1]]=ap[1].value;
+
+core.InterpretOneCycle();
+
+for(let i=0;i<8;i++){
+			if(outp[i]&&core.AddrY[i]>=0)outp[i].value=core.Bits[core.AddrY[i]];
+			if(pp[i]&&core.AddrP[i]>=0)pp[i].value=core.Integers[core.AddrP[i]];
+			}
+			send();
+
+}
+
+
+function text()
+{
+	for(let i=0;i<8;i++){
+	if(outp[i])outp[i].value=0;
+	}
+	core.LoadProgram();
+	if(runner)clearInterval(runner);
+	runner=setInterval(run,10);
+	
+}
+var reader=new FileReader();
+function open_file(){
+	let mf=id("myfile");
+	console.log("loading: "+mf.files[0].name);
+	reader.readAsBinaryString(mf.files[0]);
+    reader.onloadend=function(){
+    
+    id("code").value=reader.result;
+	text();
+    }
+  }
+</script>
+
+<body onload="init()">
+<H1>LDmicro interpreter for K8055</H1>
+<p style="border:inset;width:fit-content">
+IN:
+<my-led id="in0"></my-led>
+<my-led id="in1"></my-led>
+<my-led id="in2"></my-led>
+<my-led id="in3"></my-led>
+<my-led id="in4"></my-led>
+
+<form style="border:inset;width:fit-content;">
+Analog:
+<input type="range" id="a0" value=0  max=255>
+<input type="range" id="a1" value=0 max=255>
+</form>
+</p>
+
+<p style="border:inset;width:fit-content">
+OUT:
+<my-led id="out0"></my-led>
+<my-led id="out1"></my-led>
+<my-led id="out2"></my-led>
+<my-led id="out3"></my-led>
+<my-led id="out4"></my-led>
+<my-led id="out5"></my-led>
+<my-led id="out6"></my-led>
+<my-led id="out7"></my-led>
+</p>
+<form style="border:inset;width:fit-content;">
+	PWM:
+<input type="range" id="p0" value=0 max=255>
+<input type="range" id="p1" value=0 max=255>
+</form>
+
+
+<textarea id="code" onchange="text()" rows=20 cols=80 ></textarea><br>
+
+<button onclick="k8055()">Open K8055</button><p></p>
+<input  id="myfile" type="file" accept=".int" onchange="open_file()"></input>
+</body>	
+</html>

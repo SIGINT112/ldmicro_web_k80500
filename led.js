@@ -1,0 +1,28 @@
+class led extends HTMLElement{
+#off="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpaIVBzuIdMhQO1kQFXGUKhbBQmkrtOpgcukXNGlIUlwcBdeCgx+LVQcXZ10dXAVB8APE1cVJ0UVK/F9SaBHjwXE/3t173L0DhGaVqWbPBKBqlpFOxMVcflUMvMIPAQMIIyoxU09mFrPwHF/38PH1LsazvM/9OQaVgskAn0g8x3TDIt4gntm0dM77xCFWlhTic+Jxgy5I/Mh12eU3ziWHBZ4ZMrLpeeIQsVjqYrmLWdlQiaeJI4qqUb6Qc1nhvMVZrdZZ+578hcGCtpLhOs0wElhCEimIkFFHBVVYiNGqkWIiTftxD/+o40+RSyZXBYwcC6hBheT4wf/gd7dmcWrSTQrGgd4X2/4YAwK7QKth29/Htt06AfzPwJXW8deawOwn6Y2OFjkChraBi+uOJu8BlzvAyJMuGZIj+WkKxSLwfkbflAeGb4H+Nbe39j5OH4AsdbV8AxwcAtESZa97vLuvu7d/z7T7+wFeV3KfHKFEAwAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+cDAgsgMns6qQIAAAGBSURBVDjL7ZM9S1xREIafcz/EuJBKRXBhkbCNQhC2ibD/YP+QjXZBsfUXpIlg7VaSIiFpLC0j0Vx3dV3vai5evdk958w5aSyCbPCaysIXppv3mYGZF1707KQea9hfoD4QWo1Jans5yaWlvZly9ORJH6rEnUU2pIH1Dbws438t4Q/eYNdm2Xg3RTzOF/4LuF3lfbXCqooICBRKwQQQQwA0e5b4cMinUsD9BepvX/NRRQRUKjA/D/kdGMdQIBMYCCvAzqnh+m9vMA44EFoBhHgFM7OwuARhjHgYebBApAgttB56o3HAxiQ1JxAoD0kXun3c7xHF/XaZwK2D6ZDaQ+/YDfdykhsDzoAvDPam4HYopBYu7uvKQiokpYCXlvbREEk1XGnoa+ho+KnhRMOxhswhEbRLHeVrwfVczCugmQn0BToGTgx813BmIHdsfb5jt/TbaM+XniUeCCtdQ3Cs4ccIehbJHVuZsH5ucU9OSnOKuoXWdEgtFZII2t+K/0jKi0rrD92GrRuNkoUaAAAAAElFTkSuQmCC";
+#on="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpaIVBzuIdMhQO1kQFXGUKhbBQmkrtOpgcukXNGlIUlwcBdeCgx+LVQcXZ10dXAVB8APE1cVJ0UVK/F9SaBHjwXE/3t173L0DhGaVqWbPBKBqlpFOxMVcflUMvMIPAQMIIyoxU09mFrPwHF/38PH1LsazvM/9OQaVgskAn0g8x3TDIt4gntm0dM77xCFWlhTic+Jxgy5I/Mh12eU3ziWHBZ4ZMrLpeeIQsVjqYrmLWdlQiaeJI4qqUb6Qc1nhvMVZrdZZ+578hcGCtpLhOs0wElhCEimIkFFHBVVYiNGqkWIiTftxD/+o40+RSyZXBYwcC6hBheT4wf/gd7dmcWrSTQrGgd4X2/4YAwK7QKth29/Htt06AfzPwJXW8deawOwn6Y2OFjkChraBi+uOJu8BlzvAyJMuGZIj+WkKxSLwfkbflAeGb4H+Nbe39j5OH4AsdbV8AxwcAtESZa97vLuvu7d/z7T7+wFeV3KfHKFEAwAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+cDAgsgJmHgfX8AAAF1SURBVDjL7ZMxS5tRFIafe3OvJSotaTFQl9ghICmFQiYh/yD/pLvQqVsJ9Sd06qxzRjN0DToVSumgiYn0a+yX2E8MyXfvPR2iS1D80skh73bgvs99D+ccWOrRST304OkXyjKibiqUpi06IaY5/szPhX9a/4R93qZRTHDFBNmIkBffkGcHuPw7GuYt9i5f7l5gg4/2De/1KlqtKJQB8YBDo6jJAOt/cDjv0/e1abbZVU9gjTVesYUxFjQoAyoP+iW7tko5E1BG1GfpFUWKVHiNSS1MQKaAA3LkxFGf95q7gKZCSa5BrNA1Pc7TiPFwTLgE+QuSANegC5QyAactOnpzlsbrlMkkncEGEC4g/IGQQIjpZGo5xDTdd7w/hdAFfwahB74PoT+rZYjH0Mw0ZXdErDfIo6jJJcgFhF83sBMIEcgVe67Nfua1IeWrDLAyYidE6NuEEuHlij1J+BB+Exa+FFulLI66LlAKMR0MTXf8H5eyVGb9A8XTn+4RydnlAAAAAElFTkSuQmCC";
+#v=0;
+#obj=null;
+
+constructor(){
+	super();
+	this.attachShadow({ mode: "open" });
+	this.#obj=document.createElement("img");
+	this.#obj.src=this.#off;
+	this.shadowRoot.appendChild(this.#obj);
+	this.shadowRoot.firstElementChild.onclick =
+      e => {this.value=this.value?0:1;};
+	}
+	
+	
+set value(val){
+this.#v=val;	
+this.#obj.src=(this.#v)?this.#on:this.#off;
+}
+
+get value()
+{return this.#v;}
+
+}	
+	
+customElements.define('my-led', led);

@@ -1,5 +1,5 @@
 # ldmicro_web_k8055
-LDmicro interpreter implemented in Javascript with K8055 interface by WebHID. 
+LDmicro interpreter implemented in Javascript with K8055 interface by WebHID. Based on the original LDmicro interpreter. 
 
 Inputs: 
   X0 - X4
